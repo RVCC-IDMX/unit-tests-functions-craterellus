@@ -16,7 +16,9 @@
  * example: 'Buzz Lightyear' returns 'Lightyear, Buzz'
  */
 function nameShuffle(str) {
-  // write your code here & return value
+  const stringArr = str.split(' ');
+  const inOrder = stringArr.reverse();
+  return inOrder.join(', ');
 }
 
 /**
@@ -34,7 +36,15 @@ function nameShuffle(str) {
  * example: '&', '&' returns true
  */
 function isStrangePair(str1, str2) {
-  // write your code here & return value
+  const lastchar1 = (str1.length - 1);
+  const lastchar2 = (str2.length - 1);
+  if ((str1.charAt(0)) === (str2.charAt(lastchar2))) {
+    return true;
+  }
+  if ((str2.charAt(0)) === (str1.charAt(lastchar1))) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -46,7 +56,9 @@ function isStrangePair(str1, str2) {
  * example: '98.6%' returns 0.986
  */
 function convertToDecimal(percent) {
-  // write your code here & return value
+  const noPercent = percent.slice(0, -1);
+  const decimal = (+noPercent) / 100;
+  return decimal;
 }
 
 /**
@@ -59,7 +71,21 @@ function convertToDecimal(percent) {
  * example: [1, 2, 3, 4], [4, 3, 2, 1, 5] returns false
  */
 function checkSameSum(a1, a2) {
-  // write your code here & return value
+  const sum1 = a1.reduce(
+    (previousValue, currentValue) => previousValue + currentValue,
+    0,
+  );
+  const sum2 = a2.reduce(
+    (previousValue, currentValue) => previousValue + currentValue,
+    0,
+  );
+  if (sum1 == sum2) {
+    return true;
+  }
+  return false;
+  // add up array one
+  // add up array two
+  // if arrayone sum equals arraytwo sum return true
 }
 
 /**
@@ -70,7 +96,10 @@ function checkSameSum(a1, a2) {
  * must use a closure to save the username
  */
 function saveLogin(name) {
-  // write your code here
+  function findLogin() {
+    return name;
+  }
+  return findLogin;
 }
 
 module.exports = {
@@ -78,5 +107,5 @@ module.exports = {
   isStrangePair,
   convertToDecimal,
   checkSameSum,
-  saveLogin
+  saveLogin,
 };
