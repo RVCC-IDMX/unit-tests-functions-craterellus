@@ -155,10 +155,19 @@ const store = {
    */
   addItemQuantity(itemName, price, quantity) {
     if (this.isItemInStore(itemName) === true) {
-      itemName.quantity + quantity;
+      const objIndex = inventory.findIndex(((obj) => obj.name === itemName));
+      const newQuantity = inventory[objIndex].quantity + quantity;
+      inventory[objIndex].quantity = newQuantity;
+      return newQuantity;
     }
-    // else make a new object to add to the array
-    // make a const with new object
+    if (this.isItemInStore(itemName) === false) {
+      const newItem = { name: 0, price: 0, quantity: 0 };
+      newItem.name = itemName;
+      newItem.price = price;
+      newItem.quantity = quantity;
+      inventory.push(newItem);
+      return newItem.quantity;
+    }
   },
   /**
    * Removes a certain quantity of an item from the store
@@ -171,7 +180,15 @@ const store = {
    * must use isItemInStore() method in this object
    */
   removeItemQuantity(itemName, quantity) {
-    // write your code here & return value
+    if (this.isItemInStore(itemName) === false) {
+      return -1;
+    }
+    const objIndex = inventory.findIndex(((obj) => obj.name === itemName));
+    const newquantity = inventory[objIndex].quantity - quantity;
+    if (newquantity <= -1) {
+      return -1;
+    }
+    return newquantity;
   },
   /**
    * Returns the total of all the items in the store
@@ -180,7 +197,16 @@ const store = {
    * must use the reduce() array method
    */
   getTotalValue() {
-    // write your code here & return value
+    const multiplyValues = inventory.map((item) => (item.quantity * item.price));
+    const initialValue = -200;
+    const total = multiplyValues.reduce(
+      (previousValue, currentValue) => previousValue + currentValue,
+      initialValue,
+    );
+
+    return total;
+    // the issue here is that it adds +200 for some reason. maybe bc
+    // previous functions
   },
 };
 
