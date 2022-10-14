@@ -38,10 +38,8 @@ function nameShuffle(str) {
 function isStrangePair(str1, str2) {
   const lastchar1 = (str1.length - 1);
   const lastchar2 = (str2.length - 1);
-  if ((str1.charAt(0)) === (str2.charAt(lastchar2))) {
-    return true;
-  }
-  if ((str2.charAt(0)) === (str1.charAt(lastchar1))) {
+  if ((str1.charAt(0)) === (str2.charAt(lastchar2))
+    || (str2.charAt(0)) === (str1.charAt(lastchar1))) {
     return true;
   }
   return false;
@@ -79,7 +77,7 @@ function checkSameSum(a1, a2) {
     (previousValue, currentValue) => previousValue + currentValue,
     0,
   );
-  if (sum1 == sum2) {
+  if (sum1 === sum2) {
     return true;
   }
   return false;

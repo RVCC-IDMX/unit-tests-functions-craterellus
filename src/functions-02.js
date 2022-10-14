@@ -160,14 +160,12 @@ const store = {
       inventory[objIndex].quantity = newQuantity;
       return newQuantity;
     }
-    if (this.isItemInStore(itemName) === false) {
-      const newItem = { name: 0, price: 0, quantity: 0 };
-      newItem.name = itemName;
-      newItem.price = price;
-      newItem.quantity = quantity;
-      inventory.push(newItem);
-      return newItem.quantity;
-    }
+    const newItem = { name: 0, price: 0, quantity: 0 };
+    newItem.name = itemName;
+    newItem.price = price;
+    newItem.quantity = quantity;
+    inventory.push(newItem);
+    return newItem.quantity;
   },
   /**
    * Removes a certain quantity of an item from the store
@@ -188,6 +186,7 @@ const store = {
     if (newquantity <= -1) {
       return -1;
     }
+    inventory[objIndex].quantity = newquantity;
     return newquantity;
   },
   /**
@@ -198,7 +197,7 @@ const store = {
    */
   getTotalValue() {
     const multiplyValues = inventory.map((item) => (item.quantity * item.price));
-    const initialValue = -200;
+    const initialValue = 0;
     const total = multiplyValues.reduce(
       (previousValue, currentValue) => previousValue + currentValue,
       initialValue,
